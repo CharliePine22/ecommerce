@@ -52,7 +52,7 @@ const ProductDetails = ({ product, products }) => {
               <AiFillStar />
               <AiFillStar />
               <AiFillStar />
-              <AiOutlineStar />
+              <AiOutlineStar color={'black'} />
             </div>
             <p>(20)</p>
           </div>
