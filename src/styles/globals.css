@@ -16,6 +16,14 @@ a {
   text-decoration: none;
 }
 
+.categories-container {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+  margin-top: 80px;
+  flex-wrap: wrap;
+}
+
 .main-container {
   max-width: 1400px;
   margin: auto;
@@ -149,19 +157,20 @@ span.text-red {
 
 .hero-banner-container {
   padding: 100px 40px;
-  background-color: #dcdcdc;
+  background-color: transparent;
   border-radius: 15px;
   position: relative;
-  height: 500px;
+  height: 550px;
   line-height: 0.9;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  overflow: hidden;
 }
 .hero-banner-container .beats-solo {
   font-size: 20px;
 }
 .hero-banner-container button {
-  border-radius: 15px;
+  border-radius: 4px;
   padding: 10px 16px;
   background-color: #0066cc;
   color: white;
@@ -171,24 +180,37 @@ span.text-red {
   font-weight: 500;
   cursor: pointer;
   z-index: 10000 !important;
+  border: 1px solid transparent;
+  transition: all 0.2s ease-in-out;
+  box-shadow: 1px 3px 3px 2px rgba(0, 0, 0, 0.5);
+}
+
+.hero-banner-container button:hover {
+  transform: translate(1px, -1px);
+  border: 1px solid white;
+  /* font-weight: 900; */
 }
 
 .hero-banner-container h3 {
   font-size: 4rem;
   margin-top: 4px;
+  color: dodgerblue;
+  text-shadow: 2px 2px 3px black;
 }
 .hero-banner-container h1 {
   color: white;
-  font-size: 10em;
+  font-size: 8.5em;
   margin-left: -20px;
   text-transform: uppercase;
+  text-shadow: 2px 2px 4px black;
 }
 .hero-banner-image {
   position: absolute;
   top: 0%;
-  right: 20%;
-  width: 450px;
-  height: 450px;
+  right: 0%;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
 }
 
 .desc {
@@ -454,8 +476,8 @@ span.text-red {
 .product-detail-image {
   border-radius: 15px;
   background-color: #ebebeb;
-  width: 400px;
-  height: 400px;
+  width: 450px;
+  height: 450px;
   cursor: pointer;
   transition: 0.3s ease-in-out;
   object-fit: contain;
@@ -649,17 +671,107 @@ span.text-red {
   margin-top: 10px;
 }
 
+.category {
+  padding: 0;
+  width: 660px;
+  cursor: pointer;
+}
+
+.category:hover .hero-banner-image {
+  filter: grayscale(1) blur(1px);
+}
+
+.category:hover button {
+  color: #0066cc;
+  cursor: pointer;
+  text-shadow: 2px 3px 2px rgba(0, 0, 0, 0.65) !important;
+}
+
+.category button {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  background: transparent;
+  text-transform: uppercase;
+  border: 0;
+  box-shadow: none;
+  font-size: 5rem;
+  margin: 0;
+  padding: 0;
+}
+
+.category button:hover {
+  transform: translate(-50%, -50%);
+  border: 0;
+}
+
+.quote-container {
+  height: 250px;
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px dashed black;
+  border-bottom: 1px dashed black;
+  margin: 50px 0;
+}
+
+.quote-container p {
+  font-style: italic;
+  margin-bottom: 10px;
+  font-size: 1.25rem;
+  max-width: 85%;
+  text-align: center;
+}
+
+.quote-container span {
+  font-size: 1.1rem;
+}
+
+.last_banner {
+  width: 100%;
+  height: 500px;
+  margin-top: 15px;
+}
+
 @media screen and (max-width: 800px) {
   .hero-banner-container {
     height: 560px;
+    line-height: 1.3;
   }
-  .hero-banner-image {
+
+  .hero-banner-container button {
+    margin-top: 60px;
+    z-index: 10000;
+  }
+
+  .categories-container {
+    flex-wrap: wrap;
+  }
+
+  .category {
+    width: 100%;
+    height: 340px;
+    margin: 5px 0;
+  }
+
+  .category button {
+    margin: 0;
+    font-size: 4.5rem;
+  }
+
+  .women_btn {
+    /* left: 0; */
+  }
+
+  /* .hero-banner-image {
     width: 70%;
     height: 62%;
     top: 5%;
     right: -8%;
     max-width: 400px;
-  }
+  } */
   .footer-banner-container {
     height: 560px;
     margin-top: 80px;
@@ -670,7 +782,7 @@ span.text-red {
     top: 6%;
     height: 56%;
   }
-  /* .banner-desc .left h3 {
+  .banner-desc .left h3 {
     font-weight: 900;
     font-size: 50px;
     margin-left: 5px;
@@ -691,22 +803,18 @@ span.text-red {
     flex-wrap: wrap;
     gap: 20px;
   }
-  .hero-banner-container {
-    line-height: 1.3;
-  }
+
   .hero-banner-container h1 {
-    font-size: 50px;
+    font-size: 56px;
+    margin-left: 0px;
   }
   .hero-banner-container h3 {
-    font-size: 40px;
+    font-size: 50px;
   }
-  .hero-banner-container button {
-    margin-top: 90px;
-    z-index: 10000;
-  }
+
   .desc {
     bottom: 60px;
-  } */
+  }
   .product-detail-container {
     flex-wrap: wrap;
   }

@@ -29,6 +29,9 @@ const ProductDetails = ({ product, products }) => {
             <img
               src={urlFor(image && image[index])}
               className='product-detail-image'
+              style={{
+                objectFit: image[index].asset._ref.slice(-3) == 'jpg' && 'fill',
+              }}
             />
           </div>
           <div className='small-images-container'>
@@ -40,6 +43,10 @@ const ProductDetails = ({ product, products }) => {
                   i === index ? 'small-image selected-image' : 'small-image'
                 }
                 onMouseEnter={() => setIndex(i)}
+                style={{
+                  objectFit:
+                    image[index].asset._ref.slice(-3) == 'jpeg' && 'cover',
+                }}
               />
             ))}
           </div>
