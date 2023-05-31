@@ -58,7 +58,7 @@ const Home = ({ products, bannerData, categoryData }) => {
         <h2>
           {productsFilter === 'TOP' ? 'Top Selling Products' : 'New Releases'}
         </h2>
-        <p>So much variety, you can't not find something for you!</p>
+        <p>So much variety, you can&#39;t not find something for you!</p>
       </div>
       <div className='products-container'>
         {productsFilter === 'TOP'
