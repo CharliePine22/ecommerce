@@ -709,6 +709,7 @@ span.text-red {
 .quote-container {
   height: 250px;
   display: flex;
+  flex-direction: column;
   align-content: center;
   align-items: center;
   justify-content: center;
