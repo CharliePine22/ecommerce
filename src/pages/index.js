@@ -18,9 +18,9 @@ const Home = ({ products, bannerData, categoryData }) => {
       <HeroBanner heroBanner={bannerData.length && bannerData[1]} />
       <div className='quote-container'>
         <p>
-          Style is the only thing you cant buy. It&#39;s not in a shopping bag,
-          a label, or a price tag. It&#39;s something reflected from our soul to
-          the outside world, an emotion.
+          Style is the only thing you can&#39;t buy. It&#39;s not in a shopping
+          bag, a label, or a price tag. It&#39;s something reflected from our
+          soul to the outside world, an emotion.
         </p>
         <span>Alber Elbaz</span>
       </div>
