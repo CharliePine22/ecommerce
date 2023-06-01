@@ -16,5 +16,10 @@ export default {
       title: 'Title',
       type: 'string',
     },
+    {
+      name: 'order',
+      title: 'Order',
+      type: 'number',
+    },
   ],
 }

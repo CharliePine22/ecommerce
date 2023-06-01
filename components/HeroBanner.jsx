@@ -1,6 +1,9 @@
 import Link from 'next/link';
 import React from 'react';
 
+import { Raleway } from 'next/font/google';
+const raleway = Raleway({ subsets: ['latin'] });
+
 import { urlFor } from '../lib/client';
 
 const HeroBanner = ({ heroBanner }) => {
@@ -9,7 +12,7 @@ const HeroBanner = ({ heroBanner }) => {
       <div>
         {/* <p className='beats-solo'>{heroBanner.smallText}</p> */}
         <h3>{heroBanner.midText}</h3>
-        <h1>{heroBanner.largeText1}</h1>
+        <h1 className={raleway.className}>{heroBanner.largeText1}</h1>
         <img
           src={urlFor(heroBanner.image)}
           alt='headphones'
@@ -20,10 +23,12 @@ const HeroBanner = ({ heroBanner }) => {
           <Link href={`/`}>
             <button type='button'>{heroBanner.buttonText}</button>
           </Link>
-          {/* <div className='desc'>
-            <h5>Description</h5>
-            <p>{heroBanner.desc}</p>
-          </div> */}
+          {/* <p>
+          Style is the only thing you can&#39;t buy. It&#39;s not in a shopping
+          bag, a label, or a price tag. It&#39;s something reflected from our
+          soul to the outside world, an emotion.
+        </p>
+        <span>Alber Elbaz</span> */}
         </div>
       </div>
     </div>
