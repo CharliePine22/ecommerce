@@ -18,10 +18,19 @@ a {
 
 .categories-container {
   display: flex;
-  flex-direction: row-reverse;
   justify-content: space-between;
-  margin-top: 80px;
-  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+.categories-wrapper {
+  display:flex;
+  flex-direction: column;
+}
+
+.categories-wrapper h3 {
+  font-size: 2.5rem;
+  text-align: center;
+  color: #324d67;
 }
 
 .main-container {
@@ -160,12 +169,13 @@ span.text-red {
   background-color: transparent;
   border-radius: 15px;
   position: relative;
-  height: 550px;
+  height: 500px;
   line-height: 0.9;
   width: 100%;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   overflow: hidden;
 }
+
 .hero-banner-container .beats-solo {
   font-size: 20px;
 }
@@ -673,7 +683,8 @@ span.text-red {
 
 .category {
   padding: 0;
-  width: 660px;
+  width: 450px;
+  height: 450px;
   cursor: pointer;
 }
 
@@ -696,7 +707,7 @@ span.text-red {
   text-transform: uppercase;
   border: 0;
   box-shadow: none;
-  font-size: 5rem;
+  font-size: 3.9rem;
   margin: 0;
   padding: 0;
 }
@@ -731,9 +742,7 @@ span.text-red {
 }
 
 .last_banner {
-  width: 100%;
-  height: 500px;
-  margin-top: 15px;
+  font-size: 3.2rem;
 }
 
 @media screen and (max-width: 800px) {
