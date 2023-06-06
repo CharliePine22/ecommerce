@@ -32,8 +32,8 @@ export default {
       type: 'string',
     },
     {
-      name: 'Sub_Category',
-      title: 'sub_category',
+      name: 'sub_Category',
+      title: 'Sub_category',
       type: 'string',
     },
     {
