@@ -46,7 +46,7 @@ a {
 .navbar-container {
   display: flex;
   justify-content: space-between;
-  margin: 6px 18px;
+  margin: 6px 18px 15px;
   position: relative;
 }
 .marquee-text {
@@ -89,6 +89,13 @@ span.text-red {
   color: gray;
   font-size: 18px;
 }
+
+.logo img {
+  height: 75px;
+  width: 75px;
+  position: absolute;
+}
+
 .cart-icon {
   font-size: 25px;
   color: gray;
@@ -790,8 +797,11 @@ span.text-red {
     width: 100%;
   }
 
-  .women_btn {
-    /* left: 0; */
+  .logo img {
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    top: -7px;
   }
 
   /* .hero-banner-image {
@@ -849,6 +859,10 @@ span.text-red {
 
   .desc {
     bottom: 60px;
+  }
+
+  .navbar-container {
+    margin: 6px 18px 25px;
   }
 
   .product-detail-container {

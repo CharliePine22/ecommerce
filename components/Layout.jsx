@@ -9,7 +9,7 @@ const Layout = ({ children }) => {
       <Head>
         <title>Charlie Ecommerce Store</title>
       </Head>
-      <header>
+      <header style={{ position: 'sticky', top: '10px' }}>
         <Navbar />
       </header>
 

@@ -27,8 +27,18 @@ export default {
       },
     },
     {
-      name: 'Category',
+      name: 'category',
       title: 'Category',
+      type: 'string',
+    },
+    {
+      name: 'Sub_Category',
+      title: 'sub_category',
+      type: 'string',
+    },
+    {
+      name: 'gender',
+      title: 'Gender',
       type: 'string',
     },
     {
