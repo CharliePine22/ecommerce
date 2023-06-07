@@ -1,23 +1,24 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
-import { urlFor } from '../lib/client';
+import { urlFor } from "../lib/client";
 
 const Product = ({ product: { image, name, slug, price } }) => {
   console.log(slug);
-  console.log('HEREs');
   return (
-    <div style={{ maxWidth: '250px' }}>
-      <Link href={`/product/${slug.current}`}>
-        <div className='product-card'>
-          <img
-            src={urlFor(image && image[0])}
-            width={250}
-            height={250}
-            className='product-image'
-          />
-          <p className='product-name'>{name}</p>
-          <p className='product-price'>${price}</p>
+    <div style={{ maxWidth: "250px" }}>
+      <Link href={`/product/${slug?.current}`}>
+        <div className="product-card">
+          {image && (
+            <img
+              src={urlFor(image && image[0])}
+              width={250}
+              height={250}
+              className="product-image"
+            />
+          )}
+          <p className="product-name">{name}</p>
+          <p className="product-price">${price}</p>
         </div>
       </Link>
     </div>
