@@ -927,7 +927,7 @@ span.text-red {
     font-size: 20px;
   }
   .track {
-    animation: marquee 10s linear infinite;
+    animation: marquee 30s linear infinite;
     width: 550%;
   }
   .success-wrapper,
