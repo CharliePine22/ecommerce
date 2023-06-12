@@ -7,9 +7,9 @@ const Layout = ({ children }) => {
   return (
     <div className='layout'>
       <Head>
-        <title>Charlie Ecommerce Store</title>
+        <title>JCJ Swag</title>
       </Head>
-      <header style={{ position: 'sticky', top: '10px' }}>
+      <header style={{ position: 'sticky', top: '16px', zIndex: '9999' }}>
         <Navbar />
       </header>
 

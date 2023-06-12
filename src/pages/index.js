@@ -10,11 +10,8 @@ import { Libre_Baskerville } from 'next/font/google';
 const libre = Libre_Baskerville({ subsets: ['latin'], weight: '700' });
 
 const Home = ({ products, bannerData, categoryData }) => {
-  const [productsFilter, setProductsFilter] = useState('TOP');
-  const newReleases = products?.slice(-5);
   const topSellers = products?.slice(0, 5);
   categoryData.sort((a, b) => a.order - b.order);
-  console.log(categoryData);
 
   return (
     <>
