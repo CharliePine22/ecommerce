@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { client, urlFor } from '../../../lib/client';
 import {
   AiOutlineMinus,
@@ -6,15 +6,41 @@ import {
   AiFillStar,
   AiOutlineStar,
 } from 'react-icons/ai';
+import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
 import { Product } from '../../../components';
 import { useStateContext } from '../../../context/StateContext';
 
-const ProductDetails = ({ product, products }) => {
-  const { image, name, details, price } = product;
-
+const ProductDetails = ({ product, relatedProducts }) => {
+  const { image, name, details, price, reviews } = product;
+  const [rating, setRating] = useState();
   const { decreaseQuantity, increaseQuantity, quantity, onAdd, setShowCart } =
     useStateContext();
   const [index, setIndex] = useState(0);
+
+  // Calculate the median rating for the product and return the nearest whole number in filled stars
+  const determineRatingStars = () => {
+    if (reviews.length == 0) {
+      return (
+        <>
+          <AiOutlineStar color={'black'} />
+          <AiOutlineStar color={'black'} />
+          <AiOutlineStar color={'black'} />
+          <AiOutlineStar color={'black'} />
+          <AiOutlineStar color={'black'} />
+        </>
+      );
+    } else {
+      const calculatedRating =
+        reviews.reduce((partialSum, a) => partialSum + a, 0) / reviews.length;
+
+      console.log(calculatedRating);
+    }
+  };
+
+  useEffect(() => {
+    if (!reviews) return;
+    determineRatingStars();
+  }, [reviews]);
 
   const handleBuyNow = () => {
     onAdd(product, quantity);
@@ -54,14 +80,29 @@ const ProductDetails = ({ product, products }) => {
         <div className='product-detail-desc'>
           <h1>{name}</h1>
           <div className='reviews'>
-            <div style={{ marginTop: '5px' }}>
-              <AiFillStar />
-              <AiFillStar />
-              <AiFillStar />
-              <AiFillStar />
-              <AiOutlineStar color={'black'} />
-            </div>
-            <p>(20)</p>
+            {reviews ? (
+              <>
+                <div style={{ marginTop: '5px' }}>
+                  <AiFillStar />
+                  <AiFillStar />
+                  <AiFillStar />
+                  <AiFillStar />
+                  <AiOutlineStar color={'black'} />
+                </div>
+                <p>({reviews.length})</p>
+              </>
+            ) : (
+              <>
+                <div style={{ marginTop: '5px' }}>
+                  <AiOutlineStar color={'black'} />
+                  <AiOutlineStar color={'black'} />
+                  <AiOutlineStar color={'black'} />
+                  <AiOutlineStar color={'black'} />
+                  <AiOutlineStar color={'black'} />
+                </div>
+                <p>(0)</p>
+              </>
+            )}
           </div>
           <h4>Details:</h4>
           <p>{details}</p>
@@ -97,7 +138,7 @@ const ProductDetails = ({ product, products }) => {
         <h2>You may also like</h2>
         <div className='marquee'>
           <div className='maylike-products-container track'>
-            {products.map((item) => (
+            {relatedProducts.map((item) => (
               <Product key={item._id} product={item} />
             ))}
           </div>
@@ -139,11 +180,13 @@ export const getStaticProps = async ({ params: { slug } }) => {
   const query = `*[_type == "product" && slug.current == '${slug}'][0]`;
   const productsQuery = '*[_type == "product"]';
   const product = await client.fetch(query);
-  console.log(product);
   const products = await client.fetch(productsQuery);
+  const relatedProducts = products.filter(
+    (item) => item.category === product.category && item.slug !== product.slug
+  );
 
   return {
-    props: { products, product },
+    props: { relatedProducts, product },
   };
 };
 

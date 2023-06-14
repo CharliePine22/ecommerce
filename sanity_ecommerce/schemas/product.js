@@ -32,6 +32,18 @@ export default {
       type: 'string',
     },
     {
+      name: 'sizes',
+      title: 'Sizes',
+      type: 'array',
+      of: [{type: 'string'}],
+    },
+    {
+      name: 'reviews',
+      title: 'Reviews',
+      type: 'array',
+      of: [{type: 'number', validation: (Rule) => Rule.greaterThan(0).lessThan(5.1)}],
+    },
+    {
       name: 'sub_category',
       title: 'Sub_Category',
       type: 'string',
