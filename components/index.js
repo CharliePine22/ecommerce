@@ -6,3 +6,5 @@ export { default as Layout } from './Layout';
 export { default as Navbar } from './Navbar';
 export { default as Product } from './Product';
 export { default as CategoryBanner } from './CategoryBanner';
+export { default as RatingStars } from './RatingStars';
+export { default as ProductOptions } from './ProductOptions';

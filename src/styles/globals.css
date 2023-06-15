@@ -538,14 +538,17 @@ span.text-red {
   transition: 0.3s ease-in-out;
   object-fit: contain;
 }
+
 .product-detail-image:hover {
   background-color: #0066cc;
 }
+
 .small-images-container {
   display: flex;
   gap: 10px;
   margin-top: 20px;
 }
+
 .small-image {
   border-radius: 8px;
   background-color: #ebebeb;
@@ -558,6 +561,7 @@ span.text-red {
 .selected-image {
   background-color: #0066cc;
 }
+
 .reviews {
   color: #ffd700;
   margin-top: 3px;
@@ -569,35 +573,57 @@ span.text-red {
 .product-detail-desc h4 {
   margin-top: 10px;
 }
+
 .product-detail-desc p {
   margin-top: 10px;
 }
+
 .reviews p {
   color: #324d67;
   margin-top: 0px;
+  margin-right: 8px;
 }
+
+.average-rating-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2px;
+}
+
+.average-rating-container p {
+  font-size: 0.9rem;
+  margin-left: 1px;
+  font-weight: 500;
+  color: black;
+}
+
 .product-detail-desc .price {
   font-weight: 700;
   font-size: 26px;
   margin-top: 30px;
   color: #0066cc;
 }
+
 .price .old-price,
 .product-price .old-price,
 .price .old-price {
   color: gray;
   text-decoration: line-through;
 }
+
 .product-detail-desc .quantity {
   display: flex;
   gap: 20px;
   margin-top: 10px;
   align-items: center;
 }
+
 .product-detail-desc .buttons {
   display: flex;
   gap: 30px;
 }
+
 .buttons .add-to-cart {
   padding: 10px 20px;
   border: 1px solid #0066cc;
@@ -612,9 +638,11 @@ span.text-red {
   transition: transform 0.5s ease;
   user-select: none;
 }
+
 .buttons .add-to-cart:hover {
   transform: scale(1.1, 1.1);
 }
+
 .buttons .buy-now {
   width: 200px;
   user-select: none;
@@ -629,27 +657,33 @@ span.text-red {
   transform: scale(1, 1);
   transition: transform 0.5s ease;
 }
+
 .buttons .buy-now:hover {
   transform: scale(1.1, 1.1);
 }
+
 .quantity-desc {
   border: 1px solid gray;
   padding: 6px;
 }
+
 .quantity-desc span {
   font-size: 16px;
   padding: 6px 12px;
   cursor: pointer;
 }
+
 .quantity-desc .minus {
   color: #0066cc;
 }
+
 .quantity-desc .num {
   border-right: 1px solid gray;
   border-left: 1px solid gray;
   font-size: 20px;
   user-select: none;
 }
+
 .quantity-desc .plus {
   color: rgb(49, 168, 49);
 }
@@ -657,6 +691,7 @@ span.text-red {
 .maylike-products-wrapper {
   margin-top: 120px;
 }
+
 .maylike-products-wrapper h2 {
   text-align: center;
   margin: 50px 50px 15px;

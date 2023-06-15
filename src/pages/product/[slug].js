@@ -1,45 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { client, urlFor } from '../../../lib/client';
-import {
-  AiOutlineMinus,
-  AiOutlinePlus,
-  AiFillStar,
-  AiOutlineStar,
-} from 'react-icons/ai';
+import { AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from 'react-icons/ai';
 import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
-import { Product } from '../../../components';
+import { Product, ProductOptions, RatingStars } from '../../../components';
 import { useStateContext } from '../../../context/StateContext';
 
 const ProductDetails = ({ product, relatedProducts }) => {
   const { image, name, details, price, reviews } = product;
-  const [rating, setRating] = useState();
   const { decreaseQuantity, increaseQuantity, quantity, onAdd, setShowCart } =
     useStateContext();
   const [index, setIndex] = useState(0);
+  const [averageRating, setAverageRating] = useState(0);
 
   // Calculate the median rating for the product and return the nearest whole number in filled stars
   const determineRatingStars = () => {
-    if (reviews.length == 0) {
-      return (
-        <>
-          <AiOutlineStar color={'black'} />
-          <AiOutlineStar color={'black'} />
-          <AiOutlineStar color={'black'} />
-          <AiOutlineStar color={'black'} />
-          <AiOutlineStar color={'black'} />
-        </>
-      );
-    } else {
-      const calculatedRating =
-        reviews.reduce((partialSum, a) => partialSum + a, 0) / reviews.length;
-
-      console.log(calculatedRating);
-    }
+    const calculatedRating =
+      reviews.reduce((partialSum, a) => partialSum + a, 0) / reviews.length;
+    return calculatedRating;
   };
 
+  console.log(product);
   useEffect(() => {
     if (!reviews) return;
-    determineRatingStars();
+    setAverageRating(determineRatingStars());
   }, [reviews]);
 
   const handleBuyNow = () => {
@@ -80,32 +63,17 @@ const ProductDetails = ({ product, relatedProducts }) => {
         <div className='product-detail-desc'>
           <h1>{name}</h1>
           <div className='reviews'>
-            {reviews ? (
-              <>
-                <div style={{ marginTop: '5px' }}>
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiFillStar />
-                  <AiOutlineStar color={'black'} />
-                </div>
-                <p>({reviews.length})</p>
-              </>
-            ) : (
-              <>
-                <div style={{ marginTop: '5px' }}>
-                  <AiOutlineStar color={'black'} />
-                  <AiOutlineStar color={'black'} />
-                  <AiOutlineStar color={'black'} />
-                  <AiOutlineStar color={'black'} />
-                  <AiOutlineStar color={'black'} />
-                </div>
-                <p>(0)</p>
-              </>
-            )}
+            <div style={{ marginTop: '5px' }}>
+              <RatingStars precision={0.5} product={product} />
+            </div>
+            <p>({reviews ? reviews.length : 0})</p>
+            <div className='average-rating-container'>
+              <BsStarFill /> <p>{averageRating}</p>
+            </div>
           </div>
           <h4>Details:</h4>
           <p>{details}</p>
+          {product && product.sizes && <ProductOptions product={product} />}
           <p className='price'>${price}</p>
           <div className='quantity'>
             <h3>Quantity</h3>

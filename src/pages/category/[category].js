@@ -63,7 +63,10 @@ export const getStaticProps = async ({ params: { category } }) => {
   const bannerQuery = '*[_type == "banner"]';
   const products = await client.fetch(productsQuery);
   const banner = await client.fetch(bannerQuery);
-  banner.filter((product) => product.product == category);
+  const categoryBanner = banner.filter(
+    (product) => product.product.toLowerCase() == category
+  );
+  console.log(categoryBanner);
 
   // Return all products that arent accessories
   let categoryList;
@@ -80,7 +83,7 @@ export const getStaticProps = async ({ params: { category } }) => {
     props: {
       products: categoryList,
       category: category,
-      categoryBanner: banner[0],
+      categoryBanner: categoryBanner[0],
     },
   };
 };
