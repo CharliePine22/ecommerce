@@ -68,7 +68,7 @@ const ProductDetails = ({ product, relatedProducts }) => {
             </div>
             <p>({reviews ? reviews.length : 0})</p>
             <div className='average-rating-container'>
-              <BsStarFill /> <p>{averageRating}</p>
+              <BsStarFill /> <p>{averageRating.toFixed(2)}</p>
             </div>
           </div>
           <h4>Details:</h4>
