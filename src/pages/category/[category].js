@@ -36,7 +36,7 @@ export const getStaticPaths = async () => {
     console.log(products);
     const paths = products.map((product) => ({
       params: {
-        category: product.title,
+        category: product.title.toLowerCase(),
       },
     }));
     return {
