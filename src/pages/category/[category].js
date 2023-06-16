@@ -61,6 +61,7 @@ export const getStaticProps = async ({ params: { category } }) => {
   const categoryBanner = banner.filter(
     (product) => product.product.toLowerCase() == category
   );
+  console.log(categoryInital);
 
   // Return all products that arent accessories
   let categoryList;
