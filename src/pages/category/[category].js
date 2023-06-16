@@ -3,8 +3,7 @@ import { client, urlFor } from '../../../lib/client';
 import { HeroBanner, Product } from '../../../components';
 
 const Category = ({ products, category, categoryBanner }) => {
-  const [index, setIndex] = useState(0);
-
+  console.log(category);
   products.sort((a, b) =>
     a.category == 'Clothing' ? -1 : b.category == 'Clothing' ? 1 : 0
   );
@@ -33,7 +32,6 @@ export const getStaticPaths = async () => {
       title 
     }`;
     const products = await client.fetch(query);
-    console.log(products);
     const paths = products.map((product) => ({
       params: {
         category: product.title.toLowerCase(),
