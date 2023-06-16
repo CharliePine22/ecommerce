@@ -29,17 +29,14 @@ const Category = ({ products, category, categoryBanner }) => {
 
 export const getStaticPaths = async () => {
   try {
-    const query = `*[_type == "product"] {
-      gender, 
-      slug {
-        current
-      } 
+    const query = `*[_type == "category"] {
+      title 
     }`;
     const products = await client.fetch(query);
+    console.log(products);
     const paths = products.map((product) => ({
       params: {
-        category: product.slug.current,
-        gender: product.gender,
+        category: product.title,
       },
     }));
     return {
@@ -66,7 +63,6 @@ export const getStaticProps = async ({ params: { category } }) => {
   const categoryBanner = banner.filter(
     (product) => product.product.toLowerCase() == category
   );
-  console.log(categoryBanner);
 
   // Return all products that arent accessories
   let categoryList;
