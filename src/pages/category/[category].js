@@ -1,15 +1,10 @@
 import React, { useState } from 'react';
-import { client, urlFor } from '../../../lib/client';
-import { HeroBanner, Product } from '../../../components';
+import { client } from '../../../lib/client';
+import { HeroBanner, Pagination, Product } from '../../../components';
 
 const Category = ({ products, category, categoryBanner }) => {
-  console.log(category);
   products.sort((a, b) =>
     a.category == 'Clothing' ? -1 : b.category == 'Clothing' ? 1 : 0
-  );
-
-  const subCategories = new Set(
-    products.map((product) => product.sub_category)
   );
 
   return (
@@ -18,9 +13,7 @@ const Category = ({ products, category, categoryBanner }) => {
       <h3 className='category-title'>Shop {category}</h3>
       <div className='category-nav'></div>
       <div className='category-container'>
-        {products.map((product) => (
-          <Product key={product._id} product={product} />
-        ))}
+        <Pagination itemsPerPage={10} items={products} />
       </div>
     </div>
   );

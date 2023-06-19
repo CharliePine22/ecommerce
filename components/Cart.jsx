@@ -19,12 +19,28 @@ const Cart = () => {
     totalQuantities,
     cartItems,
     setShowCart,
-    quantity,
-    decreaseQuantity,
-    increaseQuantity,
     toggleCartItemQuantity,
     onRemove,
   } = useStateContext();
+
+  const convertFullSize = (size) => {
+    switch (size) {
+      case 'XS':
+        return 'Xtra-Small';
+      case 'S':
+        return 'Small';
+      case 'M':
+        return 'Medium';
+      case 'L':
+        return 'Large';
+      case 'XL':
+        return 'Xtra-Large';
+      case 'XXL':
+        return 'Xtra-Xtra-Large';
+      default:
+        return size;
+    }
+  };
 
   const handleCheckout = async () => {
     const stripe = await getStripe();
@@ -82,9 +98,15 @@ const Cart = () => {
                 <div className='item-desc'>
                   <div className='flex top'>
                     <h5>{item.name}</h5>
-                    <h4>${item.price}</h4>
+                    <h4>${item.price.toFixed(2)}</h4>
                     <p>x{item.quantity}</p>
                   </div>
+                  {item.option && (
+                    <h5 className='cart-product-option'>
+                      {item.category == 'Electronics' ? 'Color' : 'Size'}:{' '}
+                      {convertFullSize(item.option)}
+                    </h5>
+                  )}
                   <div className='flex bottom'>
                     <div>
                       <p className='quantity-desc'>
@@ -123,7 +145,7 @@ const Cart = () => {
           <div className='cart-bottom'>
             <div className='total'>
               <h3>Subtotal:</h3>
-              <h3>${totalPrice}</h3>
+              <h3>${totalPrice.toFixed(2)}</h3>
             </div>
             <div className='btn-container'>
               <button type='button' className='btn' onClick={handleCheckout}>

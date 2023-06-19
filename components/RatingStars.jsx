@@ -46,6 +46,7 @@ const RatingStars = ({
         .setIfMissing({ reviews: [] })
         .append('reviews', [rating])
         .commit({ autoGenerateArrayKeys: true });
+      console.log(sanityRequest);
 
       if (sanityRequest._id) {
         if (typeof window !== 'undefined') {

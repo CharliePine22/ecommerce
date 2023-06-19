@@ -13,7 +13,12 @@ export const StateContext = ({ children }) => {
   let foundProduct;
   let index;
 
-  const onAdd = (product, quantity) => {
+  const onAdd = (product, quantity, option) => {
+    if (product.sizes && !option) {
+      toast.error('Please select an option before adding to cart!');
+      return;
+    }
+
     const checkProductInCart = cartItems.find(
       (item) => item._id === product._id
     );
@@ -22,19 +27,25 @@ export const StateContext = ({ children }) => {
     setTotalQuantities((prevTotal) => prevTotal + quantity);
 
     if (checkProductInCart) {
+      console.log(cartItems);
       const updatedCartItems = cartItems.map((cartItem) => {
-        if (cartProduct._id === product.__id)
+        if (cartItem._id === product.__id)
           return {
             ...cartItem,
             quantity: cartItem.quantity + quantity,
+            option,
           };
       });
 
       setCartItems(updatedCartItems);
+      localStorage.setItem('cart', JSON.stringify(updatedCartItems));
     } else {
       product.quantity = quantity;
-
-      setCartItems([...cartItems, { ...product }]);
+      setCartItems([...cartItems, { ...product, option }]);
+      localStorage.setItem(
+        'cart',
+        JSON.stringify([...cartItems, { ...product, option }])
+      );
     }
     toast.success(`${product.name} added to the cart`);
   };
@@ -47,6 +58,7 @@ export const StateContext = ({ children }) => {
     );
     setTotalQuantities((prevTotal) => prevTotal - foundProduct.quantity);
     setCartItems(newCartItems);
+    localStorage.setItem('cart', newCartItems);
   };
 
   const toggleCartItemQuantity = (id, value) => {

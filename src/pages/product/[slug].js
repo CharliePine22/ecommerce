@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { client, urlFor } from '../../../lib/client';
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from 'react-icons/ai';
-import { BsStarFill, BsStarHalf, BsStar } from 'react-icons/bs';
+import { BsStarFill } from 'react-icons/bs';
 import { Product, ProductOptions, RatingStars } from '../../../components';
 import { useStateContext } from '../../../context/StateContext';
 
@@ -9,6 +9,7 @@ const ProductDetails = ({ product, relatedProducts }) => {
   const { image, name, details, price, reviews } = product;
   const { decreaseQuantity, increaseQuantity, quantity, onAdd, setShowCart } =
     useStateContext();
+  const [currentOption, setCurrentOption] = useState(null);
   const [index, setIndex] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
 
@@ -19,8 +20,8 @@ const ProductDetails = ({ product, relatedProducts }) => {
     return calculatedRating;
   };
 
-  console.log(product);
   useEffect(() => {
+    setCurrentOption(null);
     if (!reviews) return;
     setAverageRating(determineRatingStars());
   }, [reviews]);
@@ -28,6 +29,10 @@ const ProductDetails = ({ product, relatedProducts }) => {
   const handleBuyNow = () => {
     onAdd(product, quantity);
     setShowCart(true);
+  };
+
+  const selectProductOption = (item) => {
+    setCurrentOption(item);
   };
 
   return (
@@ -39,7 +44,10 @@ const ProductDetails = ({ product, relatedProducts }) => {
               src={urlFor(image && image[index])}
               className='product-detail-image'
               style={{
-                objectFit: image[index].asset._ref.slice(-3) == 'jpg' && 'fill',
+                objectFit:
+                  image[index].asset._ref.slice(-3) == 'jpg'
+                    ? 'fill'
+                    : 'contain',
               }}
             />
           </div>
@@ -54,7 +62,9 @@ const ProductDetails = ({ product, relatedProducts }) => {
                 onMouseEnter={() => setIndex(i)}
                 style={{
                   objectFit:
-                    image[index].asset._ref.slice(-3) == 'jpeg' && 'cover',
+                    image[index].asset._ref.slice(-3) == 'jpeg'
+                      ? 'cover'
+                      : 'contain',
                 }}
               />
             ))}
@@ -62,6 +72,8 @@ const ProductDetails = ({ product, relatedProducts }) => {
         </div>
         <div className='product-detail-desc'>
           <h1>{name}</h1>
+
+          {/* Product Rating */}
           <div className='reviews'>
             <div style={{ marginTop: '5px' }}>
               <RatingStars precision={0.5} product={product} />
@@ -71,10 +83,21 @@ const ProductDetails = ({ product, relatedProducts }) => {
               <BsStarFill /> <p>{averageRating.toFixed(2)}</p>
             </div>
           </div>
+
           <h4>Details:</h4>
           <p>{details}</p>
-          {product && product.sizes && <ProductOptions product={product} />}
-          <p className='price'>${price}</p>
+
+          {/* Product Options (Sizing and Colors) */}
+          {product && product.sizes && (
+            <ProductOptions
+              product={product}
+              selectProductOption={(option) => selectProductOption(option)}
+              currentOption={currentOption}
+            />
+          )}
+
+          {/* Product Price and Cart Options */}
+          <p className='price'>${price.toFixed(2)}</p>
           <div className='quantity'>
             <h3>Quantity</h3>
             <p className='quantity-desc'>
@@ -91,7 +114,7 @@ const ProductDetails = ({ product, relatedProducts }) => {
             <button
               type='button'
               className='add-to-cart'
-              onClick={() => onAdd(product, quantity)}
+              onClick={() => onAdd(product, quantity, currentOption)}
             >
               Add to Cart
             </button>
@@ -102,6 +125,7 @@ const ProductDetails = ({ product, relatedProducts }) => {
         </div>
       </div>
 
+      {/* SIMILAR PRODUCTS */}
       <div className='maylike-products-wrapper'>
         <h2>You may also like</h2>
         <div className='marquee'>

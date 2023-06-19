@@ -1,19 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Dropdown from 'rc-dropdown';
 import Menu, { Item as MenuItem, Divider } from 'rc-menu';
 import 'rc-dropdown/assets/index.css';
 
-const ProductOptions = (product) => {
+const ProductOptions = ({ product, selectProductOption, currentOption }) => {
   function onSelect({ key }) {
-    console.log(`${key} selected`);
+    selectProductOption(key);
   }
 
   function onVisibleChange(visible) {
-    console.log(visible);
+    return visible;
   }
 
   const determineCategory = () => {
-    switch (product.product.category) {
+    switch (product.category) {
       case 'Clothing':
       case 'Shoes':
         return 'Sizes';
@@ -25,11 +25,13 @@ const ProductOptions = (product) => {
 
   const menu = (
     <Menu onSelect={onSelect}>
-      {product?.product.sizes.map((item, i) => (
-        <>
-          <MenuItem key={item}>{item}</MenuItem>
-          {i !== product.product.sizes.length - 1 && <Divider />}
-        </>
+      {product?.sizes.map((item, i) => (
+        <React.Fragment key={item}>
+          <MenuItem key={item} className='product-option'>
+            {item}
+          </MenuItem>
+          {i !== product.sizes.length - 1 && <Divider />}
+        </React.Fragment>
       ))}
     </Menu>
   );
@@ -42,12 +44,13 @@ const ProductOptions = (product) => {
           animation='slide-up'
           onVisibleChange={onVisibleChange}
         >
-          <button style={{ width: 100 }}>{determineCategory()}</button>
+          <button className='product-options-btn'>
+            {currentOption ? currentOption : determineCategory()}
+          </button>
         </Dropdown>
       </div>
     </div>
   );
-  // return <div className='product-options-dropdown-container'></div>;
 };
 
 export default ProductOptions;
