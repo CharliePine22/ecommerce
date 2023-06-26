@@ -35,6 +35,7 @@ const ProductOptions = ({ product, selectProductOption, currentOption }) => {
       ))}
     </Menu>
   );
+
   return (
     <div style={{ margin: '15px 0 0px' }}>
       <div>

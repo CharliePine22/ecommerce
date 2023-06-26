@@ -3,15 +3,51 @@ import { client } from '../../../lib/client';
 import { HeroBanner, Pagination, Product } from '../../../components';
 
 const Category = ({ products, category, categoryBanner }) => {
+  const [currentFilter, setCurrentFilter] = useState(null);
   products.sort((a, b) =>
     a.category == 'Clothing' ? -1 : b.category == 'Clothing' ? 1 : 0
   );
+
+  console.log(products);
+
+  const filters = [
+    'Shirts',
+    'Tanks',
+    'Sweaters',
+    'Pants',
+    'Jackets',
+    'Shoes',
+    'Accessories',
+  ];
+
+  const filteredProducts = products.filter(
+    (product) => product.sub_category == currentFilter
+  );
+  console.log(filteredProducts);
 
   return (
     <div className='category-wrapper'>
       <HeroBanner heroBanner={categoryBanner} />
       <h3 className='category-title'>Shop {category}</h3>
-      <div className='category-nav'></div>
+      <div className='category-nav'>
+        <div className='category-nav-list-container'>
+          <ul className='category-nav-list'>
+            {filters.map((filter) => (
+              <li
+                key={filter}
+                onClick={() => setCurrentFilter(filter)}
+                style={{
+                  fontWeight: currentFilter == filter && '600',
+                  textDecoration: currentFilter == filter && 'underline',
+                  color: currentFilter == filter && 'dodgerblue',
+                }}
+              >
+                {filter}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
       <div className='category-container'>
         <Pagination itemsPerPage={10} items={products} />
       </div>

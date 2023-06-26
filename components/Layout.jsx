@@ -9,7 +9,14 @@ const Layout = ({ children }) => {
       <Head>
         <title>JCJ Swag</title>
       </Head>
-      <header style={{ position: 'sticky', top: '16px', zIndex: '9999' }}>
+      <header
+        style={{
+          position: 'sticky',
+          top: '16px',
+          zIndex: '9999',
+          // height: '70px',
+        }}
+      >
         <Navbar />
       </header>
 
