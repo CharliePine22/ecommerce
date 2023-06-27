@@ -4,6 +4,7 @@ import { AiOutlineMinus, AiOutlinePlus, AiOutlineStar } from 'react-icons/ai';
 import { BsStarFill } from 'react-icons/bs';
 import { Product, ProductOptions, RatingStars } from '../../../components';
 import { useStateContext } from '../../../context/StateContext';
+import Image from 'next/image';
 
 const ProductDetails = ({ product, relatedProducts }) => {
   const { image, name, details, price, reviews } = product;
@@ -35,13 +36,19 @@ const ProductDetails = ({ product, relatedProducts }) => {
     setCurrentOption(item);
   };
 
+  const myLoader = ({ src, width, quality }) => {
+    return `${src}?q=${100}`;
+  };
+
   return (
     <div>
       <div className='product-detail-container'>
         <div>
           <div className='image-container'>
-            <img
-              src={urlFor(image && image[index])}
+            <Image
+              loader={myLoader}
+              src={`${urlFor(image[index])}`}
+              layout='fill'
               className='product-detail-image'
               style={{
                 objectFit:
@@ -53,8 +60,10 @@ const ProductDetails = ({ product, relatedProducts }) => {
           </div>
           <div className='small-images-container'>
             {image?.map((item, i) => (
-              <img
-                src={urlFor(item)}
+              <Image
+                src={`${urlFor(item)}`}
+                layout='fill'
+                loader={myLoader}
                 key={item._key}
                 className={
                   i === index ? 'small-image selected-image' : 'small-image'

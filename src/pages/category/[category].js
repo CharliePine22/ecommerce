@@ -8,7 +8,7 @@ const Category = ({ products, category, categoryBanner }) => {
     a.category == 'Clothing' ? -1 : b.category == 'Clothing' ? 1 : 0
   );
 
-  console.log(products);
+  // console.log(products);
 
   const filters = [
     'Shirts',
