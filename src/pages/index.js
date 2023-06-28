@@ -17,7 +17,10 @@ const Home = ({ products, bannerData, categoryData }) => {
     <>
       <HeroBanner heroBanner={bannerData.length && bannerData[1]} />
       <div className='categories-wrapper'>
-        <h3>Explore</h3>
+        <div className='products-heading'>
+          <h2>Explore</h2>
+          <p>Kings, Queens, and everything in betweens.</p>
+        </div>
         <div className='categories-container'>
           {categoryData.length &&
             categoryData.map((category, i) => (

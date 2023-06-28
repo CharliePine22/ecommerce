@@ -9,8 +9,11 @@ import { urlFor } from '../lib/client';
 
 const HeroBanner = ({ heroBanner }) => {
   const myLoader = ({ src }) => {
-    return `${src}?q=${100}`;
+    return `${src.split('?rect')[0]}?q=${100}`;
   };
+  const homeBanner =
+    heroBanner.image.asset._ref ==
+    'image-cb50bc89093e8684b789c660ac31f976df8bb1bc-3589x4641-jpg';
   return (
     <div className='hero-banner-container'>
       <div>
@@ -22,6 +25,7 @@ const HeroBanner = ({ heroBanner }) => {
           className='hero-banner-image'
           loader={myLoader}
           layout='fill'
+          style={{ objectPosition: '50% 69%' }}
         />
         <div>
           <Link href={`/`}>
