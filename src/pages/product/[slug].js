@@ -36,7 +36,7 @@ const ProductDetails = ({ product, relatedProducts }) => {
     setCurrentOption(item);
   };
 
-  const myLoader = ({ src, width, quality }) => {
+  const myLoader = ({ src }) => {
     return `${src}?q=${100}`;
   };
 
@@ -183,7 +183,10 @@ export const getStaticProps = async ({ params: { slug } }) => {
   const product = await client.fetch(query);
   const products = await client.fetch(productsQuery);
   const relatedProducts = products.filter(
-    (item) => item.category === product.category && item.slug !== product.slug
+    (item) =>
+      item.category === product.category &&
+      item.slug !== product.slug &&
+      item.gender == product.gender
   );
 
   return {

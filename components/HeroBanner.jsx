@@ -9,6 +9,8 @@ import { urlFor } from '../lib/client';
 
 const HeroBanner = ({ heroBanner }) => {
   const myLoader = ({ src }) => {
+    const splitSrc = src.split('?rect');
+    console.log(splitSrc);
     return `${src.split('?rect')[0]}?q=${100}`;
   };
   const homeBanner =

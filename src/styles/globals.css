@@ -1138,7 +1138,7 @@ span.text-red {
     margin: 0px 0px 25px;
     left: -10px;
     width: 100vw;
-    padding: 18px 0;
+    padding: 18px 18px;
   }
 
   .navbar-options-container {
@@ -1286,7 +1286,9 @@ span.text-red {
   }
 
   .logo img {
-    width: 70px;
+    width: 90px;
+    top: -2px;
+    left: 4px;
   }
 
   .navbar-container {
@@ -1298,6 +1300,6 @@ span.text-red {
   }
 
   .navbar-options-item {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 }
