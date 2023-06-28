@@ -20,7 +20,7 @@ const HeroBanner = ({ heroBanner }) => {
         <h3>{heroBanner.midText}</h3>
         <h1 className={raleway.className}>{heroBanner.largeText1}</h1>
         <Image
-          src={`${urlFor(heroBanner && heroBanner.image)}`}
+          src={`${urlFor(heroBanner.image && heroBanner.image)}`}
           alt={heroBanner.title}
           className='hero-banner-image'
           loader={myLoader}

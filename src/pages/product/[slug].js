@@ -61,7 +61,7 @@ const ProductDetails = ({ product, relatedProducts }) => {
           <div className='small-images-container'>
             {image?.map((item, i) => (
               <Image
-                src={`${urlFor(item)}`}
+                src={`${urlFor(item && item)}`}
                 layout='fill'
                 loader={myLoader}
                 key={item._key}
