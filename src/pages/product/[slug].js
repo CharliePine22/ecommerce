@@ -51,6 +51,7 @@ const ProductDetails = ({ product, relatedProducts }) => {
                 src={`${urlFor(image[index])}`}
                 fill={true}
                 className='product-detail-image'
+                alt={`The current product being shown`}
                 style={{
                   objectFit:
                     image[index].asset._ref.slice(-3) == 'jpg'
