@@ -6,7 +6,7 @@ import { urlFor } from '../lib/client';
 
 const Product = ({ product: { image, name, slug, price } }) => {
   // Loader for image
-  const myLoader = ({ src, width, quality }) => {
+  const myLoader = ({ src }) => {
     return `${src}?q=${100}`;
   };
 
@@ -17,7 +17,7 @@ const Product = ({ product: { image, name, slug, price } }) => {
           {image && (
             <Image
               loader={myLoader}
-              src={`${urlFor(image[0])}`}
+              src={`${urlFor(image && image[0])}`}
               fill={true}
               className='product-image'
               alt={name}

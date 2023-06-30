@@ -25,7 +25,7 @@ const HeroBanner = ({ heroBanner }) => {
           alt={`${heroBanner.title}`}
           className='hero-banner-image'
           loader={myLoader}
-          fill='true'
+          fill={true}
           style={{ objectPosition: '50% 69%' }}
         />
         <div>
