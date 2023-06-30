@@ -87,7 +87,7 @@ const Navbar = () => {
     <div className={`navbar-container ${scrolling && 'scrolling'}`}>
       <p className='logo'>
         <Link href='/'>
-          <img src={'/assets/Logo/jcj_logo_w_trans.png'} alt='JCJ Swag' />
+          <img src={'/assets/Logo/jcj_logo_w_trans.png'} alt='JCJ Swag Logo' />
         </Link>
       </p>
 
