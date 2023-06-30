@@ -1,29 +1,54 @@
 import React, { useState } from 'react';
 import { client } from '../../../lib/client';
-import { HeroBanner, Pagination, Product } from '../../../components';
+import { HeroBanner, Pagination } from '../../../components';
 
 const Category = ({ products, category, categoryBanner }) => {
-  const [currentFilter, setCurrentFilter] = useState(null);
+  const [currentFilter, setCurrentFilter] = useState('All');
   products.sort((a, b) =>
     a.category == 'Clothing' ? -1 : b.category == 'Clothing' ? 1 : 0
   );
 
-  // console.log(products);
-
-  const filters = [
+  let filters = [
+    'All',
+    'Jackets',
     'Shirts',
-    'Tanks',
+    'Shoes',
     'Sweaters',
     'Pants',
-    'Jackets',
-    'Shoes',
-    'Accessories',
+    'Tanks',
   ];
 
-  const filteredProducts = products.filter(
-    (product) => product.sub_category == currentFilter
+  const womenFilters = [
+    'All',
+    'Dresses',
+    'Jackets',
+    'Shirts',
+    'Shoes',
+    'Sweaters',
+    'Pants',
+    'Tanks',
+  ];
+
+  const accessoryFilters = [
+    'All',
+    'Bags',
+    'Clocks',
+    'Music',
+    'Ties',
+    'Video Games',
+    'Watches',
+  ];
+
+  if (category == 'accessories') {
+    filters = accessoryFilters;
+  }
+  if (category == 'women') {
+    filters = womenFilters;
+  }
+
+  const filteredProducts = products.filter((product) =>
+    currentFilter == 'All' ? product : product.sub_category == currentFilter
   );
-  console.log(filteredProducts);
 
   return (
     <div className='category-wrapper'>
@@ -49,7 +74,7 @@ const Category = ({ products, category, categoryBanner }) => {
         </div>
       </div>
       <div className='category-container'>
-        <Pagination itemsPerPage={10} items={products} />
+        <Pagination itemsPerPage={10} items={filteredProducts} />
       </div>
     </div>
   );
@@ -90,7 +115,6 @@ export const getStaticProps = async ({ params: { category } }) => {
   const categoryBanner = banner.filter(
     (product) => product.product.toLowerCase() == category
   );
-  console.log(categoryInital);
 
   // Return all products that arent accessories
   let categoryList;

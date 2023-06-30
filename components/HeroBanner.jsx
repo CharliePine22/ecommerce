@@ -9,8 +9,7 @@ import { urlFor } from '../lib/client';
 
 const HeroBanner = ({ heroBanner }) => {
   const myLoader = ({ src }) => {
-    const splitSrc = src.split('?rect');
-    console.log(splitSrc);
+    // const splitSrc = src.split('?rect');
     return `${src.split('?rect')[0]}?q=${100}`;
   };
   const homeBanner =
@@ -23,10 +22,10 @@ const HeroBanner = ({ heroBanner }) => {
         <h1 className={raleway.className}>{heroBanner.largeText1}</h1>
         <Image
           src={`${urlFor(heroBanner.image && heroBanner.image)}`}
-          alt={heroBanner.title}
+          alt={`${heroBanner.title}`}
           className='hero-banner-image'
           loader={myLoader}
-          layout='fill'
+          fill='true'
           style={{ objectPosition: '50% 69%' }}
         />
         <div>

@@ -18,7 +18,7 @@ const Product = ({ product: { image, name, slug, price } }) => {
             <Image
               loader={myLoader}
               src={`${urlFor(image[0])}`}
-              layout='fill'
+              fill={true}
               className='product-image'
               alt={name}
             />
