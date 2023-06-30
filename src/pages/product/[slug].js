@@ -45,38 +45,41 @@ const ProductDetails = ({ product, relatedProducts }) => {
       <div className='product-detail-container'>
         <div>
           <div className='image-container'>
-            <Image
-              loader={myLoader}
-              src={`${urlFor(image[index])}`}
-              layout='fill'
-              className='product-detail-image'
-              style={{
-                objectFit:
-                  image[index].asset._ref.slice(-3) == 'jpg'
-                    ? 'fill'
-                    : 'contain',
-              }}
-            />
-          </div>
-          <div className='small-images-container'>
-            {image?.map((item, i) => (
+            {image && (
               <Image
-                src={`${urlFor(item && item)}`}
-                layout='fill'
                 loader={myLoader}
-                key={item._key}
-                className={
-                  i === index ? 'small-image selected-image' : 'small-image'
-                }
-                onMouseEnter={() => setIndex(i)}
+                src={`${urlFor(image[index])}`}
+                fill={true}
+                className='product-detail-image'
                 style={{
                   objectFit:
-                    image[index].asset._ref.slice(-3) == 'jpeg'
-                      ? 'cover'
+                    image[index].asset._ref.slice(-3) == 'jpg'
+                      ? 'fill'
                       : 'contain',
                 }}
               />
-            ))}
+            )}
+          </div>
+          <div className='small-images-container'>
+            {image &&
+              image.map((item, i) => (
+                <Image
+                  src={`${urlFor(item && item)}`}
+                  fill={true}
+                  loader={myLoader}
+                  key={item._key}
+                  className={
+                    i === index ? 'small-image selected-image' : 'small-image'
+                  }
+                  onMouseEnter={() => setIndex(i)}
+                  style={{
+                    objectFit:
+                      image[index].asset._ref.slice(-3) == 'jpeg'
+                        ? 'cover'
+                        : 'contain',
+                  }}
+                />
+              ))}
           </div>
         </div>
         <div className='product-detail-desc'>
