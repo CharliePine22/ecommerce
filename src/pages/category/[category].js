@@ -10,12 +10,14 @@ const Category = ({ products, category, categoryBanner }) => {
 
   let filters = [
     'All',
+    'Hats',
     'Jackets',
     'Shirts',
     'Shoes',
     'Sweaters',
     'Pants',
     'Tanks',
+    'Watches',
   ];
 
   const womenFilters = [
