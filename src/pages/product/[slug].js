@@ -25,7 +25,7 @@ const ProductDetails = ({ product, relatedProducts }) => {
     setCurrentOption(null);
     if (!reviews) return;
     setAverageRating(determineRatingStars());
-  }, [reviews]);
+  }, [reviews, determineRatingStars]);
 
   const handleBuyNow = () => {
     onAdd(product, quantity);
@@ -51,7 +51,7 @@ const ProductDetails = ({ product, relatedProducts }) => {
                 src={`${urlFor(image[index])}`}
                 fill={true}
                 className='product-detail-image'
-                alt={`The current product being shown`}
+                alt='The current product being shown'
                 style={{
                   objectFit:
                     image[index].asset._ref.slice(-3) == 'jpg'
@@ -65,7 +65,7 @@ const ProductDetails = ({ product, relatedProducts }) => {
             {image &&
               image.map((item, i) => (
                 <Image
-                  alt={`The product ${item}`}
+                  alt='Alternative product'
                   src={`${urlFor(item && item)}`}
                   fill={true}
                   loader={myLoader}
