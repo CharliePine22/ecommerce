@@ -20,7 +20,7 @@ const Product = ({ product: { image, name, slug, price } }) => {
               src={`${urlFor(image && image[0])}`}
               fill={true}
               className='product-image'
-              alt={name}
+              alt={`${name}`}
             />
           )}
           <p className='product-name'>{name}</p>

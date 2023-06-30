@@ -19,7 +19,7 @@ const HeroBanner = ({ heroBanner }) => {
       <div>
         <h3>{heroBanner.midText}</h3>
         <h1 className={raleway.className}>{heroBanner.largeText1}</h1>
-        {heroBanner && (
+        {heroBanner && heroBanner.image && (
           <Image
             src={`${urlFor(heroBanner.image && heroBanner.image)}`}
             alt={`${heroBanner.title}`}

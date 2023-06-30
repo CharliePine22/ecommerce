@@ -64,6 +64,7 @@ const ProductDetails = ({ product, relatedProducts }) => {
             {image &&
               image.map((item, i) => (
                 <Image
+                  alt={`The product ${item}`}
                   src={`${urlFor(item && item)}`}
                   fill={true}
                   loader={myLoader}
