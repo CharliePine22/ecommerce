@@ -94,7 +94,7 @@ a {
   color: black;
   cursor: pointer;
   font-size: 1.25rem;
-  margin: 0 30px;
+  margin: 0 auto;
   transition: transform 100ms ease-in-out;
 }
 
@@ -1291,6 +1291,11 @@ span.text-red {
 
   .category button {
     font-size: 2.2rem;
+  }
+
+  .category-container .product-container {
+    max-width: 190px !important;
+    min-width: 190px !important;
   }
 
   .last_banner {
