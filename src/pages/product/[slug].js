@@ -22,10 +22,13 @@ const ProductDetails = ({ product, relatedProducts }) => {
   };
 
   useEffect(() => {
-    setCurrentOption(null);
     if (!reviews) return;
     setAverageRating(determineRatingStars());
   }, [reviews, determineRatingStars]);
+
+  useEffect(() => {
+    setCurrentOption(null);
+  }, [product]);
 
   const handleBuyNow = () => {
     onAdd(product, quantity);
@@ -33,6 +36,7 @@ const ProductDetails = ({ product, relatedProducts }) => {
   };
 
   const selectProductOption = (item) => {
+    console.log(item);
     setCurrentOption(item);
   };
 
@@ -54,7 +58,7 @@ const ProductDetails = ({ product, relatedProducts }) => {
                 alt='The current product being shown'
                 style={{
                   objectFit:
-                    image[index].asset._ref.slice(-3) == 'jpg'
+                    image[index]?.asset._ref.slice(-3) == 'jpg'
                       ? 'fill'
                       : 'contain',
                 }}

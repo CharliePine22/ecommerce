@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { AiOutlineShopping } from 'react-icons/ai';
 import { useStateContext } from '../context/StateContext';
 import { Cart } from '.';
+import { useRouter } from 'next/router';
 import Dropdown from 'rc-dropdown';
 import Menu, { Item as MenuItem, Divider } from 'rc-menu';
 import 'rc-dropdown/assets/index.css';
@@ -10,17 +11,48 @@ import 'rc-dropdown/assets/index.css';
 
 const Navbar = () => {
   const [scrolling, setScrolling] = useState();
-  const subcategories = [
+  const [width, setWidth] = useState(null);
+  const router = useRouter();
+
+  function handleWindowSizeChange() {
+    setWidth(window.innerWidth);
+  }
+
+  useEffect(() => {
+    if (!window) return;
+    const currentWidth = window.innerWidth;
+    setWidth(currentWidth);
+    window.addEventListener('resize', handleWindowSizeChange);
+    return () => {
+      window.removeEventListener('resize', handleWindowSizeChange);
+    };
+  }, [width]);
+
+  const isMobile = width <= 768;
+
+  const menSubcategories = [
+    'All',
     'Shirts',
     'Tanks',
     'Sweaters',
     'Jackets',
     'Pants',
     'Shoes',
-    'Accessories',
+  ];
+
+  const womenSubcategories = [
+    'All',
+    'Dresses',
+    'Jackets',
+    'Shirts',
+    'Shoes',
+    'Sweaters',
+    'Pants',
+    'Tanks',
   ];
 
   const accessorySubcategories = [
+    'All',
     'Bags',
     'Shoes',
     'Watches',
@@ -28,39 +60,76 @@ const Navbar = () => {
     'Video Games',
   ];
 
-  const onSelect = ({ option }) => {
-    console.log(option);
-  };
-
   const onVisibleChange = (visible) => {
     return visible;
   };
 
-  const menu = (
-    <Menu onSelect={onSelect}>
-      {subcategories.map((item, i) => (
+  const handleNavigation = (category, subcategory) => {
+    if (subcategory == 'All') router.push(`/category/${category}`);
+    else {
+      router.push(`/category/${category}`, {
+        query: {
+          subcategory: subcategory,
+        },
+      });
+    }
+  };
+
+  // Dropdown Options
+  const menMenu = (
+    <Menu>
+      {menSubcategories.map((item, i) => (
         <React.Fragment key={item}>
           <MenuItem
             key={item}
             className='product-option'
-            onClick={() => console.log(i)}
+            onClick={() => handleNavigation('men', item)}
           >
             {item}
           </MenuItem>
-          <Divider />
+          {i != menSubcategories.length - 1 && (
+            <Divider className='product-option-divider' />
+          )}
         </React.Fragment>
       ))}
     </Menu>
   );
 
-  const accessoriesMenu = (
-    <Menu onSelect={onSelect}>
-      {accessorySubcategories.map((item, i) => (
+  // Dropdown Options
+  const womenMenu = (
+    <Menu>
+      {womenSubcategories.map((item, i) => (
         <React.Fragment key={item}>
-          <MenuItem key={item} className='product-option'>
+          <MenuItem
+            key={item}
+            className='product-option'
+            onClick={() => handleNavigation('women', item)}
+          >
             {item}
           </MenuItem>
-          {i !== subcategories.length - 1 && <Divider />}
+          {i != womenSubcategories.length - 1 && (
+            <Divider className='product-option-divider' />
+          )}
+        </React.Fragment>
+      ))}
+    </Menu>
+  );
+
+  // Dropdown Options for Accessories
+  const accessoriesMenu = (
+    <Menu>
+      {accessorySubcategories.map((item, i) => (
+        <React.Fragment key={item}>
+          <MenuItem
+            key={item}
+            className='product-option'
+            onClick={() => handleNavigation('accessories', item)}
+          >
+            {item}
+          </MenuItem>
+          {i !== accessorySubcategories.length - 1 && (
+            <Divider className='product-option-divider' />
+          )}
         </React.Fragment>
       ))}
     </Menu>
@@ -95,32 +164,48 @@ const Navbar = () => {
         <div className='navbar-options-item'>
           {' '}
           <Dropdown
-            trigger={['hover']}
-            overlay={menu}
+            trigger={[isMobile ? 'click' : 'hover']}
+            overlay={menMenu}
             animation='slide-up'
             onVisibleChange={onVisibleChange}
+            placement='bottomLeft'
           >
-            <Link href='/category/men'>MEN</Link>
+            <Link
+              onClick={(event) => (isMobile ? event.preventDefault() : null)}
+              href='/category/men'
+            >
+              MEN
+            </Link>
           </Dropdown>
         </div>
         <div className='navbar-options-item'>
           <Dropdown
-            trigger={['hover']}
-            overlay={menu}
+            trigger={[isMobile ? 'click' : 'hover']}
+            overlay={womenMenu}
             animation='slide-up'
             onVisibleChange={onVisibleChange}
           >
-            <Link href='/category/women'>WOMEN</Link>
+            <Link
+              onClick={(event) => (isMobile ? event.preventDefault() : null)}
+              href={isMobile ? '' : '/category/women'}
+            >
+              WOMEN
+            </Link>
           </Dropdown>
         </div>
         <div className='navbar-options-item'>
           <Dropdown
-            trigger={['hover']}
+            trigger={[isMobile ? 'click' : 'hover']}
             overlay={accessoriesMenu}
             animation='slide-up'
             onVisibleChange={onVisibleChange}
           >
-            <Link href='/category/accessories'>ACCESSORIES</Link>
+            <Link
+              onClick={(event) => (isMobile ? event.preventDefault() : null)}
+              href='/category/accessories'
+            >
+              ACCESSORIES
+            </Link>
           </Dropdown>
         </div>
       </div>

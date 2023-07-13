@@ -26,6 +26,7 @@
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.8.0",
     "react-paginate": "^8.2.0",
+    "react-scroll-parallax": "^3.4.2",
     "stripe": "^12.7.0"
   }
 }

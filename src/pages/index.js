@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { client } from '../../lib/client';
+import { Parallax } from 'react-scroll-parallax';
 import {
   Product,
   FooterBanner,
@@ -33,7 +34,15 @@ const Home = ({ products, bannerData, categoryData }) => {
         </div>
       </div>
       <div className='products-heading'>
-        <h2>Featured Items</h2>
+        <h2>Featured Product</h2>
+      </div>
+      <div className='parralax-wrapper'>
+        <Parallax speed={-20} style={{ height: '100%' }}>
+          <div className='parralax-container'>PARRALAX PRODUCT</div>
+        </Parallax>
+      </div>
+      <div className='products-heading'>
+        <h2>Popular</h2>
         <p>So much variety, you can&#39;t not find something for you!</p>
       </div>
       <div className='products-container'>
